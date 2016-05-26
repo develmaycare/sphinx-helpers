@@ -10,7 +10,7 @@ There are a couple of utilities you may use in your ``conf.py`` file to get the
 version and release numbers of your project:
 
     # conf.py
-    from helpers import get_release, get_version
+    from sphinx_helpers import get_release, get_version
 
     # Assuming docs/source/conf.py is relative to your project root.
     release = get_release("../../VERSION.txt")
@@ -21,7 +21,7 @@ version and release numbers of your project:
 Utilities for embedding multi-media using the unique ID:
 
     # conf.py
-    from helpers import lucidchart, wistia
+    from sphinx_helpers import lucidchart, wistia
    
     # example.rst
 
