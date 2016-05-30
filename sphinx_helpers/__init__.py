@@ -13,14 +13,15 @@ These helpers provide Python-based support for various actions.
 
 """
 
-from embed import lucidchart, youtube, wistia
+from embed import lucidchart, vimeo, wistia, youtube
 
 __all__ = [
     "get_release",
     "get_version",
     "lucidchart",
-    "youtube",
+    "vimeo",
     "wistia",
+    "youtube",
 ]
 
 try:
