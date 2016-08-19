@@ -6,9 +6,9 @@ Common helpers for creating documentation with Sphinx.
 
 To install:
 
-    pip install git+https://bogeymin@bitbucket.org/develmaycare/sphinx-helpers.git;
+    pip install https://bogeymin@bitbucket.org/develmaycare/sphinx-helpers/get/master.zip
 
-## Utilities
+## Usage
 
 ### Dynamically Acquiring Version and Release
 
