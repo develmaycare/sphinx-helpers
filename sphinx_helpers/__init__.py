@@ -35,26 +35,55 @@ except ImportError:
 # Functions
 
 
-def get_version(path):
+def get_version(path, full=False):
     """Read the version from the VERSION.txt file. Returns the major version if
     it's greater than or equal to 1, or the whole release number if it's 0.
 
     :param path: The path to the VERSION.txt file.
     :type path: str
 
+	:param full: Return the full version (release) string. See 
+	             ``get_release()``.
+	:type full: bool
+
     :rtype: str
 
     """
+    
+    # Load the content of the file.
     with open(path, "rb") as f:
-        # noinspection PyShadowingNames
-        release = f.read()
+        content = f.read()
         f.close()
 
-    # Use strip() or it will break the search.
-    if release[0] == "0":
-        return u"%s" % release.strip()
-    else:
-        return u"%s" % release[0].strip()
+	# Use strip() or it will break the search.
+	content = content.strip()
+
+	# Send back the string if a full release is requested.
+	if full:
+		return content
+
+	# Parse the content for version tokens.
+	# major . minor . patch - status
+	try:
+		version, status = content.strip().split("-")		
+	except ValueError:
+		version = content.strip()
+		status = None
+	
+	tokens = version.split(".")
+	
+	if len(tokens) == 3:
+		patch = tokens[2]
+
+	if len(tokens) >= 2:
+		minor = tokens[1]
+	else:
+		minor = "0"
+		
+	major = tokens[0]
+
+	# Return the version.
+	return u"%s.%s" % (major, minor)
 
 
 def get_release(path):
@@ -67,10 +96,4 @@ def get_release(path):
     :rtype: str
 
     """
-    with open(path, "rb") as f:
-        # noinspection PyShadowingNames
-        release = f.read()
-        f.close()
-
-    # Use strip() or it will break the search.
-    return u"%s" % release.strip()
+    return get_version(path, full=True)
