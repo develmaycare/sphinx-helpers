@@ -54,7 +54,7 @@ def get_version():
 
 
 setup(
-    name='sphinx-helpers',
+    name='sphinx_helpers',
     version=get_version(),
     description='Common helpers for creating documentation with Sphinx.',
     long_description=get_description(),
