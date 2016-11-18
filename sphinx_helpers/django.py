@@ -7,7 +7,7 @@ import inspect
 # noinspection PyUnresolvedReferences
 from django.utils.html import strip_tags
 # noinspection PyUnresolvedReferences
-from django.utils.encoding import force_unicode
+from django.utils.encoding import force_text
 
 __all__ = (
     "process_help_text",
@@ -31,24 +31,27 @@ def process_help_text(app, what, name, obj, options, lines):
 
     """
 
-    # This causes import errors if left outside the function.
+    # This causes import errors if left outside the function
     # noinspection PyUnresolvedReferences
     from django.db import models
 
     # Only look at objects that inherit from Django's base model class
     if inspect.isclass(obj) and issubclass(obj, models.Model):
-
         # Grab the field list from the meta class
         # noinspection PyProtectedMember
-        fields = obj._meta._fields()
+        fields = obj._meta.get_fields()
 
         for field in fields:
+            # Skip ManyToOneRel and ManyToManyRel fields which have no 'verbose_name' or 'help_text'
+            if not hasattr(field, 'verbose_name'):
+                continue
+
             # Decode and strip any html out of the field's help text
-            help_text = strip_tags(force_unicode(field.help_text))
+            help_text = strip_tags(force_text(field.help_text))
 
             # Decode and capitalize the verbose name, for use if there isn't
             # any help text
-            verbose_name = force_unicode(field.verbose_name).capitalize()
+            verbose_name = force_text(field.verbose_name).capitalize()
 
             if help_text:
                 # Add the model field to the end of the docstring as a param
@@ -60,10 +63,16 @@ def process_help_text(app, what, name, obj, options, lines):
                 lines.append(u':param %s: %s' % (field.attname, verbose_name))
 
             # Add the field's type to the docstring
-            lines.append(u':type %s: %s' % (
-                field.attname,
-                type(field).__name__)
-            )
+            if isinstance(field, models.ForeignKey):
+                to = field.rel.to
+                lines.append(u':type %s: %s to :class:`~%s.%s`' % (
+                    field.attname,
+                    type(field).__name__,
+                    to.__module__,
+                    to.__name__
+                ))
+            else:
+                lines.append(u':type %s: %s' % (field.attname, type(field).__name__))
 
     # Return the extended docstring
     return lines
