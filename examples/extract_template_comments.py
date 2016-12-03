@@ -9,7 +9,7 @@ output = extract_template_comments("../app_name/templates/app_name")
 # Write the templates documentation.
 path = "source/templates.rst"
 with open(path, "wb") as f:
-    f.write("\n".join(output))
+    f.write(output)
     f.close()
 
 # Add this to the html target in the Makefile:

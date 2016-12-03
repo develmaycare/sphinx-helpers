@@ -56,6 +56,49 @@ fields:
     def setup(app):
         app.connect("autodoc-process-docstring", process_help_text)
 
+### Extracting Comments from Templates
+
+Create a script in the same directory as the Makefile:
+
+	# extract_template_comments.py
+	
+	# Import the helper.
+	from sphinx_helpers.utils import extract_template_comments
+
+	# Get the template comments.
+	output = extract_template_comments("../app_name/templates/app_name")
+
+	# Write the templates documentation.
+	path = "source/templates.rst"
+	with open(path, "wb") as f:
+		f.write(output)
+		f.close()
+
+You can also manually include template output:
+
+	# extract_template_comments.py
+	
+	# Import the helper.
+	from sphinx_helpers.utils import extract_template_comments
+
+	# Get the template comments. Suppress the heading and set the rst level to 3 for templates.
+	output = extract_template_comments("../app_name/templates/app_name", heading=None, level="-")
+
+	# Write the templates documentation.
+	path = "source/templates.rst"
+	with open(path, "wb") as f:
+		f.write(output)
+		f.close()
+
+Then in your rst file:
+
+	# reference.rst
+	
+	Templates
+	=========
+	
+	.. include:: templates.rst
+
 ## Tips
 
 ### Working with Django
