@@ -22,7 +22,7 @@ def get_description():
         for ext in extensions:
             path = "%s.%s" % (file_name, ext)
             if os.path.exists(path):
-                description += read_file(path)
+                description += str(read_file(path))
 
     return description
 
