@@ -15,7 +15,7 @@ def read_file(path):
 
 def get_description():
     files = ("README", "COPYING", "CHANGES", "TODO")
-    extensions = ("md", "rst", "txt")
+    extensions = ("markdown", "md", "rst", "txt")
 
     description = ""
     for file_name in files:
@@ -28,25 +28,7 @@ def get_description():
 
 
 def get_requirements():
-    content = read_file("requirements.pip")
-    dependencies = list()
-    for package in content.split("\n"):
-        if len(package) == 0:
-            continue
-
-        # HACK: setup() does not support package links in the same way as pip.
-        # Here, we check for a -e and remove 7 characters for "-e git+". This is
-        # of course very brittle. Also, it doesn't work even using
-        # ``dependency_links``.
-        # See http://stackoverflow.com/a/12151180/241720
-
-        if package[:2] == "-e":
-            pass
-            # dependencies.append(package[7:])
-        else:
-            dependencies.append(package)
-
-    return dependencies
+    return ["sphinx"]
 
 
 def get_version():
@@ -59,8 +41,8 @@ setup(
     description='Common helpers for creating documentation with Sphinx.',
     long_description=get_description(),
     author='Shawn Davis',
-    author_email='shawn@ptltd.co',
-    url='https://bitbucket.org/develmaycare/sphinx-helpers',
+    author_email='shawn@develmaycare.com',
+    url='https://github.com/develmaycare/sphinx-helpers#egg=sphinx_helpers',
     packages=find_packages(),
     install_requires=get_requirements(),
     classifiers=[
@@ -71,8 +53,8 @@ setup(
         'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.2',
-        'Programming Language :: Python :: 3.3',
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
     ],
     zip_safe=False,
     tests_require=get_requirements(),
