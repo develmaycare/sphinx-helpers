@@ -10,7 +10,7 @@ def read_file(path):
     with open(path, "rb") as f:
         contents = f.read()
         f.close()
-    return contents
+    return str(contents)
 
 
 def get_description():
@@ -22,29 +22,23 @@ def get_description():
         for ext in extensions:
             path = "%s.%s" % (file_name, ext)
             if os.path.exists(path):
-                description += str(read_file(path))
+                description += read_file(path)
 
     return description
 
 
-def get_requirements():
-    return ["sphinx"]
-
-
-def get_version():
-    return read_file("VERSION.txt")
-
-
 setup(
     name='sphinx_helpers',
-    version=get_version(),
+    version=read_file("VERSION.txt"),
     description='Common helpers for creating documentation with Sphinx.',
     long_description=get_description(),
     author='Shawn Davis',
     author_email='shawn@develmaycare.com',
     url='https://github.com/develmaycare/sphinx-helpers#egg=sphinx_helpers',
     packages=find_packages(),
-    install_requires=get_requirements(),
+    install_requires=[
+        "docutils",
+    ],
     classifiers=[
         'Development Status :: 2 - Pre Alpha',
         'Intended Audience :: Developers',
@@ -57,6 +51,8 @@ setup(
         'Programming Language :: Python :: 3.7',
     ],
     zip_safe=False,
-    tests_require=get_requirements(),
+    tests_require=[
+        "docutils",
+    ],
     test_suite='runtests.runtests'
 )
