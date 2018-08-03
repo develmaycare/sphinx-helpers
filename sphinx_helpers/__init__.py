@@ -13,8 +13,8 @@ These helpers provide Python-based support for various actions.
 
 """
 
-from embed import lucidchart, vimeo, wistia, youtube
-from utils import extract_template_comments, get_release, get_version
+from .embed import lucidchart, vimeo, wistia, youtube
+from .utils import extract_template_comments, get_release, get_version
 
 __all__ = [
     "extract_template_comments",
@@ -29,7 +29,7 @@ __all__ = [
 # Make process_help_text available through the helpers.
 try:
     # noinspection PyPackageRequirements
-    from .django import process_help_text
+    from .django_helpers import process_help_text
     __all__.append("process_help_text")
 except ImportError:
     process_help_text = None

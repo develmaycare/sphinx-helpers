@@ -8,6 +8,8 @@ from docutils import nodes
 # noinspection PyPackageRequirements
 from docutils.parsers.rst import directives
 
+# Constants
+
 # noinspection SpellCheckingInspection
 LUCIDCHART_TEMPLATE = """
 <div style="width:%(width)s; height:%(height)s; position:relative;">
@@ -22,6 +24,40 @@ LUCIDCHART_TEMPLATE = """
 <br>
 <br>
 """
+
+VIMEO_TEMPLATE = """
+<iframe
+    src="https://player.vimeo.com/video/%(embed_id)s"
+    width="%(width)s"
+    height="%(height)s"
+    frameborder="0"
+    webkitallowfullscreen mozallowfullscreen allowfullscreen>
+</iframe>
+
+"""
+
+WISTIA_TEMPLATE = """
+<div class="wistia_responsive_padding" style="padding:61.04%% 0 0 0;position:relative;">
+<div class="wistia_responsive_wrapper" style="height:100%%;left:0;position:absolute;top:0;width:100%%;">
+<iframe src="https://fast.wistia.net/embed/iframe/%(embed_id)s?videoFoam=true" allowtransparency="true" frameborder="0" scrolling="no" class="wistia_embed" name="wistia_embed" allowfullscreen mozallowfullscreen webkitallowfullscreen oallowfullscreen msallowfullscreen width="%(width)s" height="%(height)s"></iframe>
+</div>
+</div>
+<script src="https://fast.wistia.net/assets/external/E-v1.js" async></script>
+<br>
+<br>
+"""
+
+YOUTUBE_TEMPLATE = """
+<iframe
+    width="%(width)s"
+    height="%(height)s"
+    src="https://www.youtube.com/embed/%(embed_id)s"
+    frameborder="0"
+    allowfullscreen>
+</iframe>
+"""
+
+# Functions
 
 
 # noinspection PyUnusedLocal,PyPep8Naming
@@ -54,17 +90,6 @@ def lucidchart(name, args, options, content, lineno, contentOffset, blockText,
 lucidchart.content = True
 directives.register_directive('lucidchart', lucidchart)
 
-VIMEO_TEMPLATE = """
-<iframe
-    src="https://player.vimeo.com/video/%(embed_id)s"
-    width="%(width)s"
-    height="%(height)s"
-    frameborder="0"
-    webkitallowfullscreen mozallowfullscreen allowfullscreen>
-</iframe>
-
-"""
-
 
 # noinspection PyUnusedLocal,PyPep8Naming
 def vimeo(name, args, options, content, lineno, contentOffset, blockText,
@@ -94,19 +119,9 @@ def vimeo(name, args, options, content, lineno, contentOffset, blockText,
 
     return [nodes.raw('', VIMEO_TEMPLATE % context, format='html')]
 
+
 vimeo.content = True
 directives.register_directive('vimeo', vimeo)
-
-WISTIA_TEMPLATE = """
-<div class="wistia_responsive_padding" style="padding:61.04%% 0 0 0;position:relative;">
-<div class="wistia_responsive_wrapper" style="height:100%%;left:0;position:absolute;top:0;width:100%%;">
-<iframe src="https://fast.wistia.net/embed/iframe/%(embed_id)s?videoFoam=true" allowtransparency="true" frameborder="0" scrolling="no" class="wistia_embed" name="wistia_embed" allowfullscreen mozallowfullscreen webkitallowfullscreen oallowfullscreen msallowfullscreen width="%(width)s" height="%(height)s"></iframe>
-</div>
-</div>
-<script src="https://fast.wistia.net/assets/external/E-v1.js" async></script>
-<br>
-<br>
-"""
 
 
 # noinspection PyUnusedLocal,PyPep8Naming
@@ -138,17 +153,6 @@ def wistia(name, args, options, content, lineno, contentOffset, blockText,
 
 wistia.content = True
 directives.register_directive('wistia', wistia)
-
-
-YOUTUBE_TEMPLATE = """
-<iframe
-    width="%(width)s"
-    height="%(height)s"
-    src="https://www.youtube.com/embed/%(embed_id)s"
-    frameborder="0"
-    allowfullscreen>
-</iframe>
-"""
 
 
 # noinspection PyUnusedLocal,PyPep8Naming

@@ -47,7 +47,7 @@ def extract_template_comments(path, heading="Templates", level="="):
 
             inner = False
             lines = list()
-            for line in content.split("\n"):
+            for line in content.split(b"\n"):
                 if line == '{% comment %}':
                     inner = True
                     continue
@@ -57,7 +57,7 @@ def extract_template_comments(path, heading="Templates", level="="):
                     pass
 
                 if inner:
-                    lines.append(line)
+                    lines.append(str(line))
 
             return "\n".join(lines)
 
@@ -124,15 +124,15 @@ def get_version(path, full=False):
         # Parse the content for version tokens.
         # major . minor . patch - status
         try:
-            version, status = content.strip().split("-")
+            version, status = content.strip().split(b"-")
         except ValueError:
             version = content.strip()
-            status = None
+            # status = None
 
-        tokens = version.split(".")
+        tokens = version.split(b".")
 
-        if len(tokens) == 3:
-            patch = tokens[2]
+        # if len(tokens) == 3:
+        #     patch = tokens[2]
 
         if len(tokens) >= 2:
             minor = tokens[1]
