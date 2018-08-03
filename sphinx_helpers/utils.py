@@ -111,7 +111,7 @@ def get_version(path, full=False):
 
     # Load the content of the file.
     with open(path, "rb") as f:
-        content = f.read()
+        content = str(f.read())
         f.close()
 
         # Use strip() or it will break the search.
@@ -124,12 +124,12 @@ def get_version(path, full=False):
         # Parse the content for version tokens.
         # major . minor . patch - status
         try:
-            version, status = content.strip().split(b"-")
+            version, status = content.strip().split("-")
         except ValueError:
             version = content.strip()
             # status = None
 
-        tokens = version.split(b".")
+        tokens = version.split(".")
 
         # if len(tokens) == 3:
         #     patch = tokens[2]
@@ -142,7 +142,7 @@ def get_version(path, full=False):
         major = tokens[0]
 
         # Return the version.
-        return u"%s.%s" % (major, minor)
+        return "%s.%s" % (major, minor)
 
 
 def get_release(path):
