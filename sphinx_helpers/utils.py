@@ -110,8 +110,8 @@ def get_version(path, full=False):
     """
 
     # Load the content of the file.
-    with open(path, "rb") as f:
-        content = str(f.read())
+    with open(path, "r") as f:
+        content = f.read()
         f.close()
 
         # Use strip() or it will break the search.
