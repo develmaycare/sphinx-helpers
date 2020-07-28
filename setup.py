@@ -34,7 +34,7 @@ setup(
     long_description=get_description(),
     author='Shawn Davis',
     author_email='shawn@develmaycare.com',
-    url='https://github.com/develmaycare/sphinx-helpers#egg=sphinx_helpers',
+    url='https://github.com/develmaycare/sphinx-helpers',
     packages=find_packages(),
     install_requires=[
         "docutils",
@@ -52,6 +52,7 @@ setup(
     ],
     zip_safe=False,
     tests_require=[
+        "django",
         "docutils",
     ],
     test_suite='runtests.runtests'
