@@ -11,7 +11,7 @@
 ###################################
 
 # Script information.
-AUTHOR="F.S. Davis <shawn@ptltd.co>";
+AUTHOR="F.S. Davis <shawn@develmaycare.com>";
 SCRIPT=`basename $0`;
 DATE="2016-05-23";
 VERSION="0.2.1-d";
@@ -26,7 +26,7 @@ EXIT_OTHER=3;
 TRUE=0;
 FALSE=1;
 
-# This assumes the script will run from the same directory as the Makefile.
+# This assumes the script will run from the same directory as the docs Makefile.
 TMP_PATH="tmp/downloads";
 
 # Temporary file.
@@ -39,8 +39,7 @@ TMP_PATH="tmp/downloads";
 HELP="
 SUMMARY
 
-Collect directories found in source/ named _download and save them as a zip
-file in source/_static.
+Build a graph of Django models.
 
 REQUIRED
 
@@ -78,7 +77,7 @@ Example:
 
     .PHONY: graphmodels
     graphmodels:
-        source $(PYTHON_ACTIVATE) && ./graph_models.sh example_app;
+        ./graph_models.sh example_app;
 
 ";
 
@@ -127,7 +126,7 @@ if [[ $(preview) -eq $(TRUE) ]]; then
 fi;
 
 # Execute the command.
-(cd ../ && exec $cmd);
+(cd ../source && exec $cmd);
 
 # Clean up and exit.
 #if [[ -f $TEMP_FILE ]]; then rm $TEMP_FILE; fi;

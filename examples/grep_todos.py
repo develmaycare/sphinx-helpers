@@ -6,15 +6,15 @@
 # This format is also interesting.
 # http://www.approxion.com/?p=39
 
-from commands import getstatusoutput
+from subprocess import getstatusoutput
 
 
 def print_todos(section_title, path):
 
-    print "*" * len(section_title)
-    print section_title
-    print "*" * len(section_title)
-    print ""
+    print("*" * len(section_title))
+    print(section_title)
+    print("*" * len(section_title))
+    print("")
 
     (status, output) = getstatusoutput('cd ../ && find %s -type f -name "*.py"' % path)
     files = output.split("\n")
@@ -34,9 +34,9 @@ def print_todos(section_title, path):
         inside_todo = False
         start_of_todo = False
 
-        print f
-        print "=" * len(f)
-        print ""
+        print(f)
+        print("=" * len(f))
+        print("")
 
         for line in lines:
             line = line.lstrip()
@@ -44,25 +44,26 @@ def print_todos(section_title, path):
             if "# TODO:" in line:
                 inside_todo = True
                 start_of_todo = True
-                print line.replace("# TODO: ", "")
+                print(line.replace("# TODO: ", ""))
             elif len(line) == 0:
                 if inside_todo:
-                    print ""
+                    print("")
                 inside_todo = False
                 start_of_todo = False
             elif line[0] == "#":
                 if inside_todo:
-                    print line.replace("# ", "")
+                    print(line.replace("# ", ""))
             else:
                 pass
 
 
 title = "To-dos from Source"
-print "#" * len(title)
-print title
-print "#" * len(title)
-print ""
+print("#" * len(title))
+print(title)
+print("#" * len(title))
+print("")
 
-print_todos("Core", "pursuits/core")
-print_todos("Contrib Apps", "pursuits/contrib")
-print_todos("Tool Apps", "pursuits/tools")
+# Now call print_todos() ...
+print_todos("Contrib Apps", "source/contrib")
+print_todos("Local Apps", "source/local")
+print_todos("Shared Apps", "source/shared")

@@ -11,7 +11,7 @@
 ###################################
 
 # Script information.
-AUTHOR="F.S. Davis <shawn@ptltd.co>";
+AUTHOR="F.S. Davis <shawn@develmaycare.com>";
 SCRIPT=`basename $0`;
 DATE="2016-05-23";
 VERSION="0.2.1-d";
@@ -26,7 +26,7 @@ EXIT_OTHER=3;
 TRUE=0;
 FALSE=1;
 
-# This assumes the script will run from the same directory as the Makefile.
+# This assumes the script will run from the same directory as the docs Makefile.
 TMP_PATH="tmp/downloads";
 
 # Temporary file.
