@@ -1,3 +1,6 @@
 *.pyc
+.coverage
 .DS_Store
 .idea
+_scraps
+docs/build
