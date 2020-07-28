@@ -2,11 +2,19 @@
 Tools for embedding multi-media.
 
 """
+# Imports
 
-# noinspection PyPackageRequirements
 from docutils import nodes
-# noinspection PyPackageRequirements
 from docutils.parsers.rst import directives
+
+# Exports
+
+__all__ = (
+    "lucidchart",
+    "vimeo",
+    "wistia",
+    "youtube",
+)
 
 # Constants
 
@@ -39,7 +47,9 @@ VIMEO_TEMPLATE = """
 WISTIA_TEMPLATE = """
 <div class="wistia_responsive_padding" style="padding:61.04%% 0 0 0;position:relative;">
 <div class="wistia_responsive_wrapper" style="height:100%%;left:0;position:absolute;top:0;width:100%%;">
-<iframe src="https://fast.wistia.net/embed/iframe/%(embed_id)s?videoFoam=true" allowtransparency="true" frameborder="0" scrolling="no" class="wistia_embed" name="wistia_embed" allowfullscreen mozallowfullscreen webkitallowfullscreen oallowfullscreen msallowfullscreen width="%(width)s" height="%(height)s"></iframe>
+<iframe src="https://fast.wistia.net/embed/iframe/%(embed_id)s?videoFoam=true" allowtransparency="true" frameborder="0" 
+scrolling="no" class="wistia_embed" name="wistia_embed" allowfullscreen mozallowfullscreen webkitallowfullscreen 
+oallowfullscreen msallowfullscreen width="%(width)s" height="%(height)s"></iframe>
 </div>
 </div>
 <script src="https://fast.wistia.net/assets/external/E-v1.js" async></script>
@@ -61,8 +71,7 @@ YOUTUBE_TEMPLATE = """
 
 
 # noinspection PyUnusedLocal,PyPep8Naming
-def lucidchart(name, args, options, content, lineno, contentOffset, blockText,
-               state, stateMachine):
+def lucidchart(name, args, options, content, lineno, contentOffset, blockText, state, stateMachine):
     """Embed a LucidChart graphic."""
 
     if len(content) == 0:
@@ -74,6 +83,7 @@ def lucidchart(name, args, options, content, lineno, contentOffset, blockText,
         'width': "640px",
     }
 
+    # noinspection DuplicatedCode
     extra_args = content[1:]  # Because content[0] is ID
     extra_args = [ea.strip().split("=") for ea in extra_args]  # key=value
     extra_args = [ea for ea in extra_args if len(ea) == 2]  # drop bad lines
@@ -92,8 +102,7 @@ directives.register_directive('lucidchart', lucidchart)
 
 
 # noinspection PyUnusedLocal,PyPep8Naming
-def vimeo(name, args, options, content, lineno, contentOffset, blockText,
-            state, stateMachine):
+def vimeo(name, args, options, content, lineno, contentOffset, blockText, state, stateMachine):
     """Embed a Videmo video."""
 
     if len(content) == 0:
@@ -106,6 +115,7 @@ def vimeo(name, args, options, content, lineno, contentOffset, blockText,
         'height': "400",
     }
 
+    # noinspection DuplicatedCode
     extra_args = content[1:]  # Because content[0] is ID
     extra_args = [ea.strip().split("=") for ea in extra_args]  # key=value
     extra_args = [ea for ea in extra_args if len(ea) == 2]  # drop bad lines
@@ -125,8 +135,7 @@ directives.register_directive('vimeo', vimeo)
 
 
 # noinspection PyUnusedLocal,PyPep8Naming
-def wistia(name, args, options, content, lineno, contentOffset, blockText,
-           state, stateMachine):
+def wistia(name, args, options, content, lineno, contentOffset, blockText, state, stateMachine):
     """Embed a Wistia video."""
 
     if len(content) == 0:
@@ -138,6 +147,7 @@ def wistia(name, args, options, content, lineno, contentOffset, blockText,
         'height': "100%",
     }
 
+    # noinspection DuplicatedCode
     extra_args = content[1:]  # Because content[0] is ID
     extra_args = [ea.strip().split("=") for ea in extra_args]  # key=value
     extra_args = [ea for ea in extra_args if len(ea) == 2]  # drop bad lines
@@ -156,8 +166,7 @@ directives.register_directive('wistia', wistia)
 
 
 # noinspection PyUnusedLocal,PyPep8Naming
-def youtube(name, args, options, content, lineno, contentOffset, blockText,
-            state, stateMachine):
+def youtube(name, args, options, content, lineno, contentOffset, blockText, state, stateMachine):
     """Embed a YouTube video."""
 
     # See http://jasonstitt.com/youtube-in-restructured-text
@@ -172,6 +181,7 @@ def youtube(name, args, options, content, lineno, contentOffset, blockText,
         'height': "505px",
     }
 
+    # noinspection DuplicatedCode
     extra_args = content[1:]  # Because content[0] is ID
     extra_args = [ea.strip().split("=") for ea in extra_args]  # key=value
     extra_args = [ea for ea in extra_args if len(ea) == 2]  # drop bad lines
@@ -183,7 +193,7 @@ def youtube(name, args, options, content, lineno, contentOffset, blockText,
     if 'height' in extra_args:
         context['height'] = extra_args.pop('height')
 
-    return [nodes.raw('', WISTIA_TEMPLATE % context, format='html')]
+    return [nodes.raw('', YOUTUBE_TEMPLATE % context, format='html')]
 
 youtube.content = True
 directives.register_directive('youtube', youtube)
