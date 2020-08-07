@@ -32,6 +32,7 @@ docs: lines
 #> clean - Remove pyc files.
 clean:
 	find . -name '*.pyc' -delete;
+	cd docs && make clean;
 
 # lines - Generate lines of code report.
 lines:

@@ -156,3 +156,5 @@ You may also use param/type for documenting a template.
     {% endcomment %}
 
     <!-- template code goes here -->
+
+.. disqus::

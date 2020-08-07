@@ -22,6 +22,7 @@ extensions = [
     'sphinx.ext.coverage',
     'sphinx.ext.ifconfig',
     'sphinx.ext.viewcode',
+    'sphinx_helpers.disqus',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -103,9 +104,9 @@ todo_include_todos = True
 html_static_path = ['_static']
 
 # https://docs.readthedocs.io/en/stable/guides/adding-custom-css.html#adding-custom-css-or-javascript-to-sphinx-documentation
-html_css_files = [
-    "css/custom.css",
-]
+# html_css_files = [
+#     "css/custom.css",
+# ]
 
 # The name for this set of Sphinx documents.
 # "<project> v<release> documentation" by default.
@@ -134,3 +135,5 @@ intersphinx_mapping = {'https://docs.python.org/': None}
 import sphinx_rtd_theme
 html_theme = "sphinx_rtd_theme"
 html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
+
+disqus_shortname = "develmaycare"
