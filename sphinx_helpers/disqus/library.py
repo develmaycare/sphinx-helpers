@@ -17,7 +17,8 @@ from sphinx.errors import ExtensionError, SphinxError
 
 # Administrivia
 
-# Original author, but this code was copied from the working fork at https://github.com/rmk135/sphinxcontrib-disqus
+# Original author, but this code was copied/adapted from the working fork at
+# https://github.com/rmk135/sphinxcontrib-disqus
 __author__ = '@Robpol86'
 __maintainer__ = "Shawn Davis <shawn@develmaycare.com>"
 __license__ = 'MIT'
