@@ -35,7 +35,7 @@ setup(
     author='Shawn Davis',
     author_email='shawn@develmaycare.com',
     url='https://github.com/develmaycare/sphinx-helpers',
-    packages=find_packages(),
+    packages=find_packages(exclude=["examples", "examples.*"]),
     install_requires=[
         "docutils",
     ],
