@@ -51,9 +51,9 @@ setup(
         'Programming Language :: Python :: 3.7',
     ],
     zip_safe=False,
-    tests_require=[
-        "django",
-        "docutils",
-    ],
-    test_suite='runtests.runtests'
+    #tests_require=[
+    #    "django",
+    #    "docutils",
+    #],
+    #test_suite='runtests.runtests'
 )

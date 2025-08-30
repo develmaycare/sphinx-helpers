@@ -177,7 +177,7 @@ class Milestone(object):
         a.append("")
 
         a.append("- **Status:** %s" % self.state)
-        a.append("- **Due:** %s" % self.due_one)
+        a.append("- **Due:** %s" % self.due_on)
         a.append("- **Close/Open Issues:** %s/%s" % (self.closed_issues, self.open_issues))
         a.append("")
 
@@ -198,7 +198,7 @@ class Milestone(object):
         a.append("-" * len(self.title))
 
         a.append("- **Status:** %s" % self.state)
-        a.append("- **Due:** %s" % self.due_one)
+        a.append("- **Due:** %s" % self.due_on)
         a.append("- **Close/Open Issues:** %s/%s" % (self.closed_issues, self.open_issues))
         a.append("")
 
